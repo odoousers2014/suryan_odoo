@@ -951,16 +951,22 @@
             </t>
             <table>
                 <colgroup>
-                    <col width='50%' />
+                    <col width='10%' />
+                    <col width='40%' />
                     <col width='25%' />
                     <col width='25%' />
                 </colgroup>
                 <tr>
+                    <td>Sr.</td>
                     <td>Items</td>
                     <td align="right">Qty</td>
                     <td align="center">Price</td>
                 </tr>
                 <tr t-foreach="orderlines" t-as="orderline">
+                    <td>
+                         <t t-esc="orderline_index+1"/>
+                         <t t-set="widget.count" t-value="orderline_index+1"/>
+                     </td>
                     <td>
                         <t t-esc="orderline.get_product().display_name"/>
                          <t t-if="orderline.get_discount() > 0">
@@ -1036,6 +1042,8 @@
                     </td></tr>
             </table>
             <hr/>
+            <div>Total item(s): <t t-esc="widget.count"/></div>
+            <hr/>
             <div class="pos-center-align"><t t-esc="new Date().toString(Date.CultureInfo.formatPatterns.shortDate + ' ' +
                 Date.CultureInfo.formatPatterns.longTime)"/> <t t-esc="order.get('name')"/></div>
             <hr/>
@@ -1047,7 +1055,7 @@
             </t>
             <div><b>Terms and Conditons:-</b></div>
             <span>&#8226; Skin care products, Cosmetic, Shaving aids, Perfumes, Hair accessories, Fruits and vegetables, Milk and any altered merchandise will not be exchanged.</span><hr/>
-            <div>Login to www.suryan.in<br/><span>Thank You for Shopping at Suryan Organic</span></div><hr/>
+            <div>Login to http://sose.org.in <br/><span>Thank You for Shopping at Suryan Organic</span></div><hr/>
         </div>
     </t>
 <!--************************************ Changes For POS RECEIPT *********************************-->
@@ -1183,4 +1191,3 @@
     </t>
 
 </templates>
-

@@ -928,7 +928,6 @@
 
     <!--************************************ Changes For POS RECEIPT *********************************-->
     <t t-name="PosTicket">
-        <t t-set="count" t-value="1"/>
         <div class="pos-sale-ticket">
             <div class="pos-center-align">
                 <t t-esc="widget.pos.company.name"/><br />
@@ -966,7 +965,7 @@
                 <tr t-foreach="orderlines" t-as="orderline">
                     <td>
                          <t t-esc="orderline_index+1"/>
-                         <t t-set="widget.count" t-value="count + 1"/>
+                         <t t-set="widget.count" t-value="orderline_index+1"/>
                      </td>
                     <td>
                         <t t-esc="orderline.get_product().display_name"/>
@@ -1056,7 +1055,7 @@
             </t>
             <div><b>Terms and Conditons:-</b></div>
             <span>&#8226; Skin care products, Cosmetic, Shaving aids, Perfumes, Hair accessories, Fruits and vegetables, Milk and any altered merchandise will not be exchanged.</span><hr/>
-            <div>Login to www.suryan.in<br/><span>Thank You for Shopping at Suryan Organic</span></div><hr/>
+            <div>Login to http://sose.org.in <br/><span>Thank You for Shopping at Suryan Organic</span></div><hr/>
         </div>
     </t>
 <!--************************************ Changes For POS RECEIPT *********************************-->
