@@ -1437,6 +1437,7 @@ class product_template(osv.osv):
         'available_in_pos': fields.boolean('Available in the Point of Sale', help='Check if you want this product to appear in the Point of Sale'), 
         'to_weight' : fields.boolean('To Weigh With Scale', help="Check if the product should be weighted using the hardware scale integration"),
         'pos_categ_id': fields.many2one('pos.category','Point of Sale Category', help="Those categories are used to group similar products for point of sale."),
+        #'brand': fields.related('pos_categ_id','name', type='char', string='Brand',store=True),
     }
 
     _defaults = {

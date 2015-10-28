@@ -34,6 +34,8 @@ import psycopg2
 
 import openerp.addons.decimal_precision as dp
 from openerp.tools.float_utils import float_round, float_compare
+import logging
+_logger = logging.getLogger(__name__)
 
 def ean_checksum(eancode):
     """returns the checksum of an ean string of length 13, returns -1 if the string has the wrong length"""
@@ -510,6 +512,19 @@ class product_template(osv.osv):
         for product in self.browse(cr, uid, ids, context=context):
             res[product.id] = len(product.product_variant_ids)
         return res
+    
+    def _compute_margin(self, cr, uid, ids, name, arg, context=None):
+        res = {}
+
+        for product in self.browse(cr, uid, ids, context=context):
+            try:
+                res[product.id] = (product.list_price-product.standard_price)/product.list_price*100
+            except Exception,e:
+                res[product.id] = 0
+                _logger.log(25, "Sale price for product ID %d is 0, cannot "
+                              "compute margin rate...", product.name)
+        return res
+
 
     _columns = {
         'name': fields.char('Name', required=True, translate=True, select=True),
@@ -594,6 +609,7 @@ class product_template(osv.osv):
         # related to display product product information if is_product_variant
         'ean13': fields.related('product_variant_ids', 'ean13', type='char', string='EAN13 Barcode'),
         'default_code': fields.related('product_variant_ids', 'default_code', type='char', string='Internal Reference'),
+        'margin': fields.function( _compute_margin, type='float', string='Margin %'),
     }
 
     def _price_get_list_price(self, product):
