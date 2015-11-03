@@ -94,6 +94,8 @@
                             <thead>
                                 <tr>
                                     <th>Date</th>
+                                    <th>Date-time</th>
+                                    <th>Id</th>
                                     <th>Description</th>
                                     <th>Reference</th>
                                     <th>Partner</th>
@@ -104,6 +106,8 @@
                             <tbody>
                                 <tr t-foreach="statement.line_ids" t-as="line">
                                     <td><span t-field="line.date"/></td>
+                                    <td><span t-field="line.created_date"/></td>
+                                    <td><span t-field="line.id"/></td>
                                     <td><span t-field="line.name"/></td>
                                     <td><span t-field="line.ref"/></td>
                                     <td><span t-field="line.partner_id"/></td>
